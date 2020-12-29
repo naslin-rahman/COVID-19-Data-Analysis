@@ -1,0 +1,210 @@
+-- Importing schema and data
+csc343h-lizhuoq2=> \i schema.ddl
+psql:schema.ddl:1: NOTICE:  drop cascades to 28 other objects
+DETAIL:  drop cascades to type gender
+drop cascades to type outcome
+drop cascades to type class
+drop cascades to table neighbourhoodprofile
+drop cascades to table person
+drop cascades to table caseinfo
+drop cascades to table infection
+drop cascades to table neighbourhoodage
+drop cascades to table income
+drop cascades to table q1a
+drop cascades to table q1b
+drop cascades to table q2
+drop cascades to table q3
+drop cascades to table q3b
+drop cascades to view casesneighbourhoods
+drop cascades to view casescount3
+drop cascades to view fatalcases3
+drop cascades to view fatalcounts3
+drop cascades to view sourcefatal3
+drop cascades to view sourcefatalavg3
+drop cascades to view neighbourhoodelderly3
+drop cascades to table q4
+drop cascades to view casetype
+drop cascades to view fatalcasetype
+drop cascades to view fatalcount
+drop cascades to view sourcecount
+drop cascades to view sourcefatal
+drop cascades to view sourcefatalavg
+DROP SCHEMA
+CREATE SCHEMA
+SET
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+
+csc343h-lizhuoq2=> \i import_data.sql
+COPY 141
+COPY 29645
+COPY 29645
+COPY 29645
+COPY 141
+COPY 141
+DELETE 0
+DELETE 888
+DELETE 0
+DELETE 0
+DELETE 0
+DELETE 0
+
+-- Loading queries
+csc343h-lizhuoq2=> \i query.sql
+DROP TABLE
+DROP TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 140
+INSERT 0 140
+DROP TABLE
+CREATE TABLE
+INSERT 0 123
+DROP TABLE
+DROP TABLE
+CREATE TABLE
+CREATE TABLE
+psql:query.sql:60: NOTICE:  drop cascades to 6 other objects
+DETAIL:  drop cascades to view casescount3
+drop cascades to view fatalcases3
+drop cascades to view fatalcounts3
+drop cascades to view sourcefatal3
+drop cascades to view sourcefatalavg3
+drop cascades to view neighbourhoodelderly3
+DROP VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+INSERT 0 123
+INSERT 0 123
+DROP TABLE
+CREATE TABLE
+psql:query.sql:122: NOTICE:  drop cascades to 5 other objects
+DETAIL:  drop cascades to view sourcecount
+drop cascades to view fatalcasetype
+drop cascades to view fatalcount
+drop cascades to view sourcefatal
+drop cascades to view sourcefatalavg
+DROP VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+INSERT 0 7
+
+-- Question 1
+csc343h-lizhuoq2=> SELECT * FROM q1a ORDER BY numcases DESC LIMIT 10;
+           neighbourhood           | population | numcases 
+-----------------------------------+------------+----------
+ Mount Olive-Silverstone-Jamestown |      32954 |      860
+ Glenfield-Jane Heights            |      30491 |      817
+ Downsview-Roding-CFB              |      35052 |      796
+ West Humber-Clairville            |      33312 |      794
+ York University Heights           |      27593 |      715
+ Woburn                            |      53485 |      679
+ Rouge                             |      46496 |      584
+ Weston                            |      17992 |      574
+ Waterfront Communities-The Island |      65913 |      566
+ Islington-City Centre West        |      43965 |      565
+(10 rows)
+
+csc343h-lizhuoq2=> SELECT * FROM q1a ORDER BY population DESC LIMIT 10;
+            neighbourhood            | population | numcases 
+-------------------------------------+------------+----------
+ Waterfront Communities-The Island   |      65913 |      566
+ Woburn                              |      53485 |      679
+ Willowdale East                     |      50434 |      158
+ Rouge                               |      46496 |      584
+ L'Amoreaux                          |      43993 |      253
+ Islington-City Centre West          |      43965 |      565
+ Malvern                             |      43794 |      529
+ Dovercourt-Wallace Emerson-Junction |      36625 |      233
+ Downsview-Roding-CFB                |      35052 |      796
+ Parkwoods-Donalda                   |      34805 |      226
+(10 rows)
+
+csc343h-lizhuoq2=> SELECT * FROM q1b ORDER BY numcases DESC LIMIT 10;
+           neighbourhood           | numover125k | numbelow125k | numcases 
+-----------------------------------+-------------+--------------+----------
+ Mount Olive-Silverstone-Jamestown |        1815 |         7740 |      860
+ Glenfield-Jane Heights            |        1975 |         7455 |      817
+ Downsview-Roding-CFB              |        3370 |         9490 |      796
+ West Humber-Clairville            |        3395 |         6905 |      794
+ York University Heights           |        2150 |         7715 |      715
+ Woburn                            |        4410 |        13295 |      679
+ Rouge                             |        7135 |         7105 |      584
+ Weston                            |        1535 |         5570 |      574
+ Waterfront Communities-The Island |       18845 |        24495 |      566
+ Islington-City Centre West        |        8110 |        12105 |      565
+(10 rows)
+
+-- Question 2
+csc343h-lizhuoq2=> SELECT * FROM q2 ORDER BY numfatalcases DESC LIMIT 10;
+       neighbourhood        | numfatalcases 
+----------------------------+---------------
+ York University Heights    |            65
+ Islington-City Centre West |            64
+ Rouge                      |            59
+ Glenfield-Jane Heights     |            51
+ Birchcliffe-Cliffside      |            50
+ South Parkdale             |            50
+ Weston                     |            47
+ Guildwood                  |            47
+ Morningside                |            44
+ Yorkdale-Glen Park         |            42
+
+-- Question 3
+csc343h-lizhuoq2=> SELECT * FROM q3 LIMIT 10; 
+        neighbourhood        | numelderly |        avgfatal        
+----------------------------+------------+------------------------
+ L'Amoreaux                 |      10335 | 0.01185770750988142292
+ Woburn                     |       9140 | 0.03240058910162002946
+ Islington-City Centre West |       8885 | 0.11327433628318584071
+ Banbury-Don Mills          |       8615 | 0.02678571428571428571
+ Tam O'Shanter-Sullivan     |       7380 | 0.02500000000000000000
+ Rouge                      |       7310 | 0.10102739726027397260
+ Willowdale East            |       7100 | 0.01898734177215189873
+ Agincourt North            |       6970 | 0.01932367149758454106
+ Annex                      |       6950 | 0.04032258064516129032
+ Steeles                    |       6710 | 0.01941747572815533981
+(10 rows)
+
+csc343h-lizhuoq2=> SELECT * FROM q3b LIMIT 10; 
+       neighbourhood       |        avgfatal        
+--------------------------+------------------------
+ Guildwood                | 0.24607329842931937173
+ Kensington-Chinatown     | 0.20588235294117647059
+ Birchcliffe-Cliffside    | 0.18115942028985507246
+ Humber Heights-Westmount | 0.16800000000000000000
+ Mount Pleasant West      | 0.15849056603773584906
+ Playter Estates-Danforth | 0.15189873417721518987
+ Etobicoke West Mall      | 0.14772727272727272727
+ South Parkdale           | 0.13888888888888888889
+ Morningside              | 0.13414634146341463415
+ Yorkdale-Glen Park       | 0.12138728323699421965
+(10 rows)
+
+csc343h-lizhuoq2=> SELECT * FROM q4 LIMIT 10;
+    source_of_infectio     |        avgfatal        
+---------------------------+------------------------
+ N/A - Outbreak associated | 0.14299530256977065488
+ Institutional             | 0.04279279279279279279
+ Healthcare                | 0.04033485540334855403
+ Travel                    | 0.02391799544419134396
+ Community                 | 0.01744330924495389983
+ Close contact             | 0.01076663639901413932
+ Unknown/Missing           | 0.00635705456471834717
+(7 rows)
