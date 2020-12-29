@@ -1,0 +1,193 @@
+csc343h-rahma578=> \i schema.ddl
+psql:schema.ddl:1: NOTICE:  drop cascades to 9 other objects
+DETAIL:  drop cascades to type gender
+drop cascades to type outcome
+drop cascades to type class
+drop cascades to table neighbourhoodprofile
+drop cascades to table person
+drop cascades to table caseinfo
+drop cascades to table infection
+drop cascades to table neighbourhoodage
+drop cascades to table income
+DROP SCHEMA
+CREATE SCHEMA
+SET
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+csc343h-rahma578=> \COPY NeighbourhoodProfile from NeighbourhoodProfile.csv with csv
+COPY 141
+csc343h-rahma578=> select * from NeighbourhoodProfile;
+            neighbourhood            | population 
+-------------------------------------+------------
+ City of Toronto                     |    2731571
+ Agincourt North                     |      29113
+ Agincourt South-Malvern West        |      23757
+ Alderwood                           |      12054
+ Annex                               |      30526
+ Banbury-Don Mills                   |      27695
+ Bathurst Manor                      |      15873
+ Bay Street Corridor                 |      25797
+ Bayview Village                     |      21396
+ Bayview Woods-Steeles               |      13154
+ Bedford Park-Nortown                |      23236
+ Beechborough-Greenbrook             |       6577
+ Bendale                             |      29960
+ Birchcliffe-Cliffside               |      22291
+ Black Creek                         |      21737
+ Blake-Jones                         |       7727
+ Briar Hill-Belgravia                |      14257
+ Bridle Path-Sunnybrook-York Mills   |       9266
+ Broadview North                     |      11499
+ Brookhaven-Amesbury                 |      17757
+ Cabbagetown-South St. James Town    |      11669
+:
+csc343h-rahma578=> \COPY Person from Person2.csv  with csv
+COPY 29645
+assigned_id |    agegroup    |            neighbourhood            |   gender    
+-------------+----------------+-------------------------------------+-------------
+           1 | 50 to 59 Years | Willowdale East                     | FEMALE
+           2 | 50 to 59 Years | Willowdale East                     | MALE
+           3 | 20 to 29 Years | Parkwoods-Donalda                   | FEMALE
+           4 | 60 to 69 Years | Church-Yonge Corridor               | FEMALE
+           5 | 60 to 69 Years | Church-Yonge Corridor               | MALE
+           6 | 50 to 59 Years | Newtonbrook West                    | MALE
+           7 | 80 to 89 Years | Milliken                            | MALE
+           8 | 60 to 69 Years | Willowdale West                     | MALE
+           9 | 50 to 59 Years | Willowdale East                     | MALE
+          10 | 60 to 69 Years | Henry Farm                          | MALE
+          11 | 70 to 79 Years | Don Valley Village                  | FEMALE
+          12 | 50 to 59 Years | Lawrence Park South                 | MALE
+          13 | 60 to 69 Years | Bridle Path-Sunnybrook-York Mills   | MALE
+          14 | 30 to 39 Years | Moss Park                           | MALE
+          15 | 40 to 49 Years | Annex                               | MALE
+          16 | 50 to 59 Years | Willowdale East                     | MALE
+          17 | 20 to 29 Years | Westminster-Branson                 | MALE
+          18 | 40 to 49 Years | Leaside-Bennington                  | FEMALE
+          19 | 40 to 49 Years |                                     | MALE
+          20 | 60 to 69 Years | St.Andrew-Windfields                | MALE
+          21 | 80 to 89 Years | Willowdale East                     | MALE
+:
+csc343h-rahma578=> \COPY Infection from Infection.csv with csv
+COPY 29645
+csc343h-rahma578=> select * from infection;
+csc343h-rahma578=> select * from infection limit 10;^C
+csc343h-rahma578=> select * from infection limit 10;
+ assigned_id | outbreak_associated | source_of_infection 
+-------------+---------------------+---------------------
+           1 | Sporadic            | Travel
+           2 | Sporadic            | Travel
+           3 | Sporadic            | Travel
+           4 | Sporadic            | Travel
+           5 | Sporadic            | Travel
+           6 | Sporadic            | Travel
+           7 | Sporadic            | Travel
+           8 | Sporadic            | Travel
+           9 | Sporadic            | Travel
+          10 | Sporadic            | Travel
+(10 rows)
+
+csc343h-rahma578=> 
+csc343h-rahma578=> \COPY NeighbourhoodAge from NeighbourhoodAge.csv with csv
+COPY 141
+csc343h-rahma578=> slect * from neighbourhoodage limit 10;
+ERROR:  syntax error at or near "slect"
+LINE 1: slect * from neighbourhoodage limit 10;
+        ^
+csc343h-rahma578=> select * from neighbourhoodage limit 10;
+        neighbourhood         | numyoung | nummiddleaged | numelderly 
+------------------------------+----------+---------------+------------
+ City of Toronto              |   738405 |       1566225 |     492945
+ Agincourt North              |     7545 |         15535 |       6970
+ Agincourt South-Malvern West |     6435 |         13230 |       4660
+ Alderwood                    |     2995 |          7045 |       2335
+ Annex                        |     6110 |         18520 |       6950
+ Banbury-Don Mills            |     6335 |         14365 |       8615
+ Bathurst Manor               |     4265 |          8685 |       3650
+ Bay Street Corridor          |     8555 |         14825 |       2750
+ Bayview Village              |     4920 |         12850 |       4225
+ Bayview Woods-Steeles        |     3150 |          6315 |       4425
+(10 rows)
+
+csc343h-rahma578=> 
+csc343h-rahma578=> \COPY Income from Income.csv with csv
+COPY 141
+csc343h-rahma578=> select * from income limit 10;
+        neighbourhood         | numover125k | numbelow125k 
+------------------------------+-------------+--------------
+ City of Toronto              |      440120 |       715385
+ Agincourt North              |        2830 |         6185
+ Agincourt South-Malvern West |        2315 |         5830
+ Alderwood                    |        2275 |         2605
+ Annex                        |        8565 |         9280
+ Banbury-Don Mills            |        6365 |         7085
+ Bathurst Manor               |        2540 |         3635
+ Bay Street Corridor          |        4705 |        10760
+ Bayview Village              |        3865 |         6180
+ Bayview Woods-Steeles        |        2410 |         2750
+(10 rows)
+
+csc343h-rahma578=> 
+csc343h-rahma578=> \COPY CaseInfo from Case.csv with csv
+COPY 29645
+csc343h-rahma578=> select * from caseinfo limit 10;
+ assigned_id | classification | episodedate | reporteddate | outcome  
+-------------+----------------+-------------+--------------+----------
+           1 | CONFIRMED      | 2020-01-22  | 2020-01-23   | RESOLVED
+           2 | CONFIRMED      | 2020-01-21  | 2020-01-23   | RESOLVED
+           3 | CONFIRMED      | 2020-02-05  | 2020-02-21   | RESOLVED
+           4 | CONFIRMED      | 2020-02-16  | 2020-02-25   | RESOLVED
+           5 | CONFIRMED      | 2020-02-20  | 2020-02-26   | RESOLVED
+           6 | CONFIRMED      | 2020-02-24  | 2020-02-27   | RESOLVED
+           7 | CONFIRMED      | 2020-02-20  | 2020-02-28   | RESOLVED
+           8 | CONFIRMED      | 2020-02-21  | 2020-03-04   | RESOLVED
+           9 | CONFIRMED      | 2020-02-29  | 2020-02-29   | RESOLVED
+          10 | CONFIRMED      | 2020-02-26  | 2020-03-01   | RESOLVED
+(10 rows)
+
+csc343h-rahma578=> 
+csc343h-rahma578=> select * from covid.person;
+csc343h-rahma578=> select count(*) from covid.person;
+ count 
+-------
+ 29645
+(1 row)
+
+csc343h-rahma578=> select count(*) from covid.neighbourhoodprofile;
+ count 
+-------
+   141
+(1 row)
+
+csc343h-rahma578=> select count(*) from covid.caseinfo;
+ count 
+-------
+ 29645
+(1 row)
+
+csc343h-rahma578=> select count(*) from covid.infection;
+ count 
+-------
+ 29645
+(1 row)
+
+csc343h-rahma578=> select count(*) from covid.neighbourhoodage;
+ count 
+-------
+   141
+(1 row)
+
+csc343h-rahma578=> select count(*) from covid.income;
+ count 
+-------
+   141
+(1 row)
+
+csc343h-rahma578=> 
+
